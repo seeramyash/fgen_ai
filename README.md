@@ -1,6 +1,11 @@
-# E-Commerce Product Review Sentiment Analysis
+# 🎭 E-Commerce Sentiment Analysis with Fine-Tuned DistilBERT
 
-A complete end-to-end web application for analyzing product reviews using AI-powered sentiment analysis with BERT and aspect-based extraction.
+A full-stack sentiment analysis application featuring a **fine-tuned DistilBERT model** trained on 25,000 IMDB movie reviews, achieving **91.28% accuracy**. The app provides real-time sentiment analysis with aspect-based insights, batch processing, and a modern React frontend.
+
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![React](https://img.shields.io/badge/React-18.3.1-61DAFB.svg)
+![Accuracy](https://img.shields.io/badge/Accuracy-91.28%25-brightgreen.svg)
+![F1](https://img.shields.io/badge/F1_Score-0.913-brightgreen.svg)
 
 ## Features
 
@@ -12,10 +17,12 @@ A complete end-to-end web application for analyzing product reviews using AI-pow
 - **Real-time Analysis**: Instant predictions using pre-trained BERT models
 
 ### Technical Highlights
-- **BERT Model**: DistilBERT fine-tuned on SST-2 for sentiment classification
+- **Fine-Tuned DistilBERT**: Custom model trained on 25,000 IMDB reviews with 91.28% accuracy
+- **High Performance**: 0.913 F1 score, 22,819 correct predictions out of 25,000
+- **Fast Training**: Completed in 15.94 minutes on NVIDIA RTX 4050 GPU
 - **Aspect Detection**: Rule-based extraction of 10+ product aspects
 - **Data Persistence**: Supabase integration for storing review analytics
-- **Modern UI**: React with Tailwind CSS and Bootstrap components
+- **Modern UI**: React with Tailwind CSS and responsive components
 - **REST API**: Clean Flask backend with JSON endpoints
 
 ## Tech Stack
@@ -40,7 +47,11 @@ A complete end-to-end web application for analyzing product reviews using AI-pow
 ```
 project/
 ├── backend/
+│   ├── model/                 # Fine-tuned DistilBERT (active)
+│   ├── best_model/            # Backup of trained model
+│   ├── metrics/               # Training metrics & results
 │   ├── app.py                 # Flask API server
+│   ├── train_bert.py          # Model training script
 │   ├── requirements.txt       # Python dependencies
 │   └── README.md             # Backend documentation
 ├── src/
@@ -192,13 +203,30 @@ Response: {
 }
 ```
 
-## Model Information
+## 🤖 Model Information
 
-**Primary Model**: `distilbert-base-uncased-finetuned-sst-2-english`
-- Lightweight version of BERT (66M parameters)
-- Fine-tuned on Stanford Sentiment Treebank (SST-2)
-- Binary classification: Positive/Negative
-- ~95% accuracy on test set
+### **Custom Fine-Tuned DistilBERT Model**
+
+| Metric | Value |
+|--------|-------|
+| **Base Model** | distilbert-base-uncased |
+| **Training Dataset** | IMDB Movie Reviews |
+| **Training Samples** | 25,000 |
+| **Test Samples** | 25,000 |
+| **Accuracy** | 91.28% |
+| **F1 Score** | 0.913 |
+| **Training Time** | 15.94 minutes |
+| **GPU** | NVIDIA GeForce RTX 4050 |
+| **Correct Predictions** | 22,819 / 25,000 |
+| **Model Size** | 267 MB |
+
+**Training Configuration:**
+- Epochs: 3
+- Batch Size: 16
+- Learning Rate: 2e-5
+- Max Sequence Length: 256
+- Warmup Steps: 500
+- Weight Decay: 0.01
 
 **Aspect Detection**: Rule-based keyword matching
 - 10 product categories (battery, performance, quality, etc.)

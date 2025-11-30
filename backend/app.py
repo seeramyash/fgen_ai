@@ -18,9 +18,9 @@ supabase_url = os.getenv("VITE_SUPABASE_URL")
 supabase_key = os.getenv("VITE_SUPABASE_ANON_KEY")
 supabase: Client = create_client(supabase_url, supabase_key)
 
-model_name = "distilbert-base-uncased-finetuned-sst-2-english"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForSequenceClassification.from_pretrained(model_name)
+MODEL_PATH = "./model"
+tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
+model = AutoModelForSequenceClassification.from_pretrained(MODEL_PATH)
 
 ASPECT_KEYWORDS = {
     'battery': ['battery', 'charge', 'charging', 'power', 'battery life'],
@@ -227,9 +227,9 @@ def get_stats():
 
 @app.route('/health', methods=['GET'])
 def health():
-    return jsonify({'status': 'healthy', 'model': model_name}), 200
+    return jsonify({'status': 'healthy', 'model': MODEL_PATH}), 200
 
 if __name__ == '__main__':
-    print(f"Loading model: {model_name}")
+    print(f"Loading model: {MODEL_PATH}")
     print("Flask server starting...")
     app.run(debug=True, host='0.0.0.0', port=5000)

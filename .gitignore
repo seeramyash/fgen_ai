@@ -37,6 +37,11 @@ backend/.venv
 dist/
 build/
 
-# Model cache (optional - can be large)
-# .cache/
-# models/
+# Model files (large binary files - do not commit)
+backend/model/
+backend/best_model/
+backend/results/
+backend/__pycache__/
+
+# Keep metrics folder
+!backend/metrics/
